@@ -1,3 +1,4 @@
+using Application.Activities.Commands;
 using Application.Activities.Queries;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,14 @@ namespace API.Controllers
         public async Task<ActionResult<Activity>> GetActivity(Guid id)
         {
             return await Mediator.Send(new GetActivityByIdQuery(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateActivity(Activity activity)
+        {
+            await Mediator.Send(new InsertActivityCommand { Activity = activity });
+
+            return Ok();
         }
 
     }
