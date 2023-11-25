@@ -13,7 +13,6 @@ namespace Application.Activities.Handlers
         public GetActivitiesListHandler(ApplicationDbContext context)
         {
             _context = context;
-
         }
 
         public async Task<List<Activity>> Handle(GetActivitiesListQuery request, CancellationToken cancellationToken)
