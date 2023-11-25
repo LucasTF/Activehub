@@ -28,11 +28,19 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]   // api/activities
+        [HttpPut("{id}")]   // api/activities/{id}
         public async Task<IActionResult> EditActivity(Guid id, Activity activity)
         {
             activity.Id = id;
             await Mediator.Send(new EditActivityCommand { Activity = activity });
+
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]    // api/activities/{id}
+        public async Task<IActionResult> DeleteActivity(Guid id)
+        {
+            await Mediator.Send(new DeleteActivityCommand { Id = id });
 
             return Ok();
         }
