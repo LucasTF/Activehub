@@ -20,10 +20,19 @@ namespace API.Controllers
             return await Mediator.Send(new GetActivityByIdQuery(id));
         }
 
-        [HttpPost]
+        [HttpPost]  // api/activities
         public async Task<IActionResult> CreateActivity(Activity activity)
         {
             await Mediator.Send(new InsertActivityCommand { Activity = activity });
+
+            return Ok();
+        }
+
+        [HttpPut("{id}")]   // api/activities
+        public async Task<IActionResult> EditActivity(Guid id, Activity activity)
+        {
+            activity.Id = id;
+            await Mediator.Send(new EditActivityCommand { Activity = activity });
 
             return Ok();
         }
