@@ -5,16 +5,10 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import axios from "axios";
-
-type ActivityType = {
-  id: string;
-  title: string;
-  date: string;
-  description: string;
-  category: string;
-  city: string;
-  venue: string;
-};
+import { Activity } from "../types/activity";
+import Header from "./Header/Header";
+import Content from "./Content/Content";
+import Footer from "./Footer/Footer";
 
 const queryClient = new QueryClient();
 
@@ -28,22 +22,27 @@ function App() {
 }
 
 function Activities() {
-  const query = useQuery({
+  const { data } = useQuery({
     queryKey: ["activities"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:5000/api/activities");
-      return response.data as ActivityType[];
+      const response = await axios.get<Activity[]>(
+        "http://localhost:5000/api/activities",
+      );
+      return response.data;
     },
   });
 
   return (
     <>
-      <h1 className="text-3xl font-bold">Activehub</h1>
-      <ul>
-        {query.data?.map((activity) => {
-          return <li key={activity.id}>{activity.title}</li>;
-        })}
-      </ul>
+      <Header />
+      <Content>
+        <ul>
+          {data?.map((activity) => {
+            return <li key={activity.id}>{activity.title}</li>;
+          })}
+        </ul>
+      </Content>
+      <Footer />
     </>
   );
 }
