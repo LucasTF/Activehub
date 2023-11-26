@@ -1,5 +1,4 @@
-using Application.Activities.Handlers;
-using Application.Core;
+using API.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Persistence.Seeds;
@@ -9,31 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// Add Database Context to Dependency Injection container
-// Connection String defined at appsettings
-builder.Services.AddDbContext<ApplicationDbContext>(opt =>
-{
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
-
-// CORS Policy
-builder.Services.AddCors(opt =>
-{
-    opt.AddPolicy("CorsPolicy", policy =>
-    {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://127.0.0.1:5173", "http://localhost:5173");
-    });
-});
-
-// MediatR
-builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(typeof(GetActivitiesListHandler).Assembly));
-
-// AutoMapper
-builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+builder.Services.AddApplicationServices(builder.Configuration);
 
 var app = builder.Build();
 
