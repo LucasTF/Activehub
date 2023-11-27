@@ -20,12 +20,12 @@ const Navbar = () => {
       </button>
       <div
         className={
-          "fixed left-0 top-0 h-screen w-2/3 translate-x-[-100%] bg-gradient-to-r from-sky-800 to-blue-600 transition duration-300 ease-linear md:static md:h-fit md:w-fit md:translate-x-0 md:bg-none" +
+          "fixed left-0 top-0 -z-10 h-screen w-full translate-x-[-100%] bg-black/75 backdrop-blur-sm transition duration-300 ease-linear md:static md:h-fit md:w-fit md:translate-x-0 md:bg-transparent md:backdrop-blur-none" +
           " " +
           (navDrawer && "translate-x-[0%]")
         }
       >
-        <ul className="m-8 flex flex-col gap-4 md:flex-row md:items-center [&>li>a:hover]:text-cyan-400 [&>li]:font-semibold">
+        <ul className="m-8 flex h-full flex-col items-center justify-center gap-16 md:flex-row md:items-center md:gap-4 [&>li>a:hover]:text-cyan-400 [&>li]:text-2xl [&>li]:font-semibold md:[&>li]:text-base">
           <li>
             <a href="#">Atividades</a>
           </li>
