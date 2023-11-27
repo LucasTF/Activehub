@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .bg-bar-gradient {
+    @apply bg-gradient-to-r from-sky-800 to-blue-600;
+  }
+}
+
+@layer components {
+  .bg-bar-gradient-dark {
+    @apply bg-gradient-to-r from-indigo-900 to-purple-700;
+  }
+}

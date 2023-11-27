@@ -2,7 +2,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto bg-gradient-to-r from-sky-800 to-blue-600 py-4 text-center font-semibold text-white">
+    <footer className="dark:bg-bar-gradient-dark bg-bar-gradient mt-auto py-4 text-center font-semibold text-white">
       <p>Activehub &copy; {currentYear}</p>
     </footer>
   );

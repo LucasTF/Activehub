@@ -1,23 +1,21 @@
 import { useState } from "react";
 import { BiList } from "../../assets/svg/BiList.svg";
 import { BiXLg } from "../../assets/svg/BiXLg.svg";
+import { PhSunFill } from "../../assets/svg/PhSun.svg";
+import { PhMoonFill } from "../../assets/svg/PhMoon.svg";
+import { useDarkMode } from "../../hooks/useDarkMode";
 
 const Navbar = () => {
-  const [navDrawer, toggleNavDrawer] = useState<Boolean>(false);
+  const [navDrawer, toggleNavDrawer] = useState<boolean>(false);
+
+  const [darkMode, toggleDarkMode] = useDarkMode();
 
   return (
-    <nav className="fixed top-0 z-50 flex max-h-14 w-full items-center justify-between bg-gradient-to-r from-sky-800 to-blue-600 px-8 py-2 text-white md:px-48">
+    <nav className="dark:bg-bar-gradient-dark bg-bar-gradient fixed top-0 z-50 flex max-h-14 w-full items-center justify-between px-8 py-2 text-white md:px-48">
       <a href="/" className="flex items-center text-2xl">
         <img src="/assets/logo.png" alt="logo" className="mr-2 h-12" />
         <span>Activehub</span>
       </a>
-      <button onClick={() => toggleNavDrawer((state) => !state)}>
-        {navDrawer ? (
-          <BiXLg className="h-10 w-10 rounded border-[1px] border-slate-200 border-opacity-20 stroke-slate-200 p-1 md:hidden" />
-        ) : (
-          <BiList className="h-10 w-10 rounded border-[1px] border-slate-200 border-opacity-20 stroke-slate-200 p-1 md:hidden" />
-        )}
-      </button>
       <div
         className={
           "fixed left-0 top-0 -z-10 h-screen w-full translate-x-[-100%] bg-black/75 backdrop-blur-sm transition duration-300 ease-linear md:static md:h-fit md:w-fit md:translate-x-0 md:bg-transparent md:backdrop-blur-none" +
@@ -33,6 +31,24 @@ const Navbar = () => {
             <button>Criar atividade</button>
           </li>
         </ul>
+      </div>
+      <div className="flex gap-2">
+        <button
+          className="h-8 w-8 rounded border-[1px] border-slate-200 border-opacity-20 p-1"
+          onClick={() => toggleDarkMode()}
+        >
+          {darkMode ? <PhSunFill /> : <PhMoonFill />}
+        </button>
+        <button
+          className="h-8 w-8 rounded border-[1px] border-slate-200 border-opacity-20 p-1 md:hidden"
+          onClick={() => toggleNavDrawer((state) => !state)}
+        >
+          {navDrawer ? (
+            <BiXLg className="stroke-white" />
+          ) : (
+            <BiList className="stroke-white" />
+          )}
+        </button>
       </div>
     </nav>
   );
